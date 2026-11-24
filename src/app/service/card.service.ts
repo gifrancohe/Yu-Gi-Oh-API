@@ -10,11 +10,14 @@ export class CardService {
   API_URL = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
   constructor(private http: HttpClient) { }
 
-  getCards() {
-    const params = {
+  getCards(name: string | null = '', offset: number = 0) {
+    const params: { [key: string]: string } = {
       num: '100',
-      offset: '100',
+      offset: offset.toString(),
     };
+    if (name) {
+      params['fname'] = name;
+    }
     return this.http.get<Card[]>(this.API_URL, { params }).pipe(
       map((response: any) => response.data)
     );
