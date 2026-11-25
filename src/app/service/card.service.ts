@@ -22,4 +22,10 @@ export class CardService {
       map((response: any) => response.data)
     );
   }
+
+  getCardById(id: number | string) {
+    return this.http.get<Card[]>(this.API_URL, { params: { id: String(id) } }).pipe(
+      map((response: any) => response.data[0] as Card)
+    );
+  }
 }

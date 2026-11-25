@@ -1,1 +1,43 @@
-<p>detail works!</p>
+<main class="detail">
+  <a class="back" routerLink="/">← Volver</a>
+
+  <p class="state" *ngIf="loading">Cargando carta…</p>
+  <p class="state" *ngIf="error">No se pudo cargar la carta.</p>
+
+  <article class="panel" *ngIf="card">
+    <div class="art">
+      <img [src]="card.card_images[0].image_url" [alt]="card.name" />
+    </div>
+
+    <div class="info">
+      <span class="type">{{ card.type }}</span>
+      <h1>{{ card.name }}</h1>
+
+      <dl class="stats">
+        <div *ngIf="card.race">
+          <dt>Raza / Tipo</dt>
+          <dd>{{ card.race }}</dd>
+        </div>
+        <div *ngIf="card.attribute">
+          <dt>Atributo</dt>
+          <dd>{{ card.attribute }}</dd>
+        </div>
+        <div *ngIf="card.level">
+          <dt>Nivel</dt>
+          <dd>{{ card.level }} ★</dd>
+        </div>
+        <div *ngIf="isMonster && card.atk !== undefined">
+          <dt>ATK</dt>
+          <dd>{{ card.atk }}</dd>
+        </div>
+        <div *ngIf="isMonster && !isLink && card.def !== undefined">
+          <dt>DEF</dt>
+          <dd>{{ card.def }}</dd>
+        </div>
+      </dl>
+
+      <h2>Descripción</h2>
+      <p class="desc">{{ card.desc }}</p>
+    </div>
+  </article>
+</main>
