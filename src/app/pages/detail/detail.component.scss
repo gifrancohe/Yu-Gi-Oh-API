@@ -40,12 +40,40 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  perspective: 900px; // da profundidad al giro
+}
+
+.tilt {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 12px;
+  transform-style: preserve-3d;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease; // vuelve suave al salir
+
+  &.active {
+    transition: transform 0.08s linear, box-shadow 0.3s ease; // sigue al cursor sin lag
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  }
 
   img {
+    display: block;
     width: 100%;
-    max-width: 340px;
     border-radius: 12px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  // brillo que sigue al cursor
+  .glare {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none !important;
+    transition: none;
   }
 }
 
